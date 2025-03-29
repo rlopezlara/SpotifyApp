@@ -60,5 +60,6 @@
   </ion-list>
 
   <!-- Display a message if no results are found -->
-  <p *ngIf="songs.length === 0 && searchTerm">No results found.</p>
+  <p *ngIf="songs.length === 0 && searchPerformed && !loading">No results found.</p> 
+
 </ion-content>

@@ -20,19 +20,40 @@
 
     <!-- Album Header: Title and Release Date -->
     <ion-card-header>
-      <ion-card-title>{{ album?.title }}</ion-card-title>
+      <ion-grid>
+        <ion-row class="align-center">
+          <!-- Title on the left -->
+          <ion-col>
+            <ion-card-title color="success">{{ album?.title }}</ion-card-title>
+          </ion-col>
+          
+          <!-- Heart icon on the right -->
+          <ion-col size="auto">
+            <ion-icon 
+              name="heart" 
+              aria-hidden="true" 
+              [color]="isLiked ? 'danger' : ''" 
+              (click)="isLiked = !isLiked"
+              style="font-size: 24px; cursor: pointer;color: white;">
+            </ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
       <ion-card-subtitle *ngIf="album?.release_date">
         Released: {{ album?.release_date }}
       </ion-card-subtitle>
     </ion-card-header>
+    
 
     <!-- Album Content: Description and Spotify Link -->
     <ion-card-content>
-      
+
       <!-- Display album description if available -->
       <p *ngIf="album?.description">{{ album?.description }}</p>
-      <p *ngIf="album?.owner">Created by: {{ album?.owner }}</p> 
+      <p *ngIf="album?.owner" color="warning">Created by: {{ album?.owner }}</p> 
       <!-- Button to open the album on Spotify -->
+      
       <ion-button expand="full" color="success" (click)="openSpotify()">
         Listen on Spotify
       </ion-button>

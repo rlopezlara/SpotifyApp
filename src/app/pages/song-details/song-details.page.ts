@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-song-details',
@@ -9,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SongDetailsPage implements OnInit {
   album: any = null; // Holds album details retrieved from localStorage
+
+  isLiked: boolean = false;
 
   // Injects ActivatedRoute to get URL parameters
 

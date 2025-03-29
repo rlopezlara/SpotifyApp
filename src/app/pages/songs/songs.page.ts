@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SongService } from '../../services/song.service';
 import { firstValueFrom } from 'rxjs'; // Import for async/await usage with Observables
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-songs', // Identifies this component in Angular
@@ -14,8 +15,20 @@ export class SongsPage {
   songs: any[] = []; // Stores the search results from Spotify API
   loading: boolean = false; // Flag to indicate when data is being fetched
   errorMessage: string = ''; // Stores error messages for UI feedback
-
-  constructor(private songService: SongService) {} // Injects the SongService to make API calls
+  searchPerformed: boolean = false;
+  constructor(
+    private songService: SongService,
+    private toastController: ToastController
+  ) {} // Injects the SongService to make API calls
+  async presentToast(message: string, duration: number = 2000) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: 'middle', // Position at the top
+      color: 'danger', // Red color for warning
+    });
+    await toast.present();
+  }
 
   /**
    * Searches for albums or playlists based on user input.
@@ -24,12 +37,13 @@ export class SongsPage {
   async searchSongs() {
     // Prevents search if input is empty
     if (this.searchTerm.trim().length === 0) {
-      this.errorMessage = 'Please enter an artist or playlist name.'; // User feedback
+      await this.presentToast('Please enter an artist or playlist name.'); // User feedback
       return;
     }
 
     this.loading = true; // Shows loading state
     this.errorMessage = ''; // Clears previous error messages
+    this.searchPerformed = false; // Reset search state before fetching
 
     try {
       // Fetches data from the Spotify API using firstValueFrom() for better async handling
@@ -74,6 +88,7 @@ export class SongsPage {
       if (this.songs.length > 0) {
         localStorage.setItem('albums', JSON.stringify(this.songs));
       }
+      this.searchPerformed = true; // Search is completed, flag is set
     } catch (error) {
       // Displays an error message if API call fails
       this.errorMessage = 'Failed to fetch data. Please try again later.';
