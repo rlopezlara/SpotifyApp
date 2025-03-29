@@ -9,8 +9,7 @@
       <ion-back-button defaultHref="/songs"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
-
+</ion-header> 
 <!-- Main content section with full-screen mode and padding -->
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Display album details only if 'album' data exists -->
@@ -25,8 +24,7 @@
           <!-- Title on the left -->
           <ion-col>
             <ion-card-title color="success">{{ album?.title }}</ion-card-title>
-          </ion-col>
-          
+          </ion-col> 
           <!-- Heart icon on the right -->
           <ion-col size="auto">
             <ion-icon 
@@ -43,9 +41,7 @@
       <ion-card-subtitle *ngIf="album?.release_date">
         Released: {{ album?.release_date }}
       </ion-card-subtitle>
-    </ion-card-header>
-    
-
+    </ion-card-header> 
     <!-- Album Content: Description and Spotify Link -->
     <ion-card-content>
 
