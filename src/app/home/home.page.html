@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<!-- Header section of the application -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- Application Title displayed in the header -->
+    <ion-title>Demo Application IONIC</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- Main content area with padding for spacing -->
+<ion-content class="ion-padding">
+  <!-- Card component to display app information -->
+  <ion-card>
+    <!-- Image for the app (Spotify Logo) -->
+    <img alt="Spotify Logo" src="../../../assets/Spotify-Logo.white.png" />
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <!-- Card header section containing title and subtitle -->
+    <ion-card-header>
+      <ion-card-title>Album | Playlists Search App</ion-card-title>
+      <ion-card-subtitle>Look for your favorite albums' artist or playlists</ion-card-subtitle>
+    </ion-card-header>
+
+    <!-- Card content with a brief description of the app's functionality -->
+    <ion-card-content>
+      Search the top 20 albums per artist or playlists on Spotify and open them in the official app.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Navigation button to go to the search page -->
+  <ion-button expand="full" color="success" routerLink="/songs">
+    Go to Search Page
+  </ion-button>
 </ion-content>

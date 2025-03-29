@@ -1,0 +1,64 @@
+<!-- Header section with translucency enabled -->
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <!-- Application Title -->
+    <ion-title>Spotify Search</ion-title>
+
+    <!-- Back button to navigate back to the home page -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Main content section with full-screen mode and padding -->
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Search Input Field -->
+  <ion-item>
+    <!-- Two-way data binding for capturing the search term -->
+    <ion-input [(ngModel)]="searchTerm" placeholder="Enter artist name or playlist"></ion-input>
+  </ion-item>
+
+  <!-- Radio Button Group for Selecting Search Type (Albums or Playlists) -->
+  <ion-list>
+    <ion-radio-group [(ngModel)]="searchType">
+      <!-- Header label for the radio group -->
+      <ion-list-header>
+        <ion-label>Search Type</ion-label>
+      </ion-list-header>
+
+      <!-- Option to search for Albums -->
+      <ion-item>
+        <ion-radio value="albums"></ion-radio>
+        <ion-label>Albums</ion-label>
+      </ion-item>
+
+      <!-- Option to search for Playlists -->
+      <ion-item>
+        <ion-radio value="playlists"></ion-radio>
+        <ion-label>Playlists</ion-label>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <!-- Search Button to trigger the search function -->
+  <ion-button color="success" expand="full" (click)="searchSongs()">Search</ion-button>
+
+  <!-- Display the Search Results if Available -->
+  <ion-list color="medium" *ngIf="songs.length > 0">
+    <!-- Iterate through the songs array and display each item -->
+    <ion-item button *ngFor="let item of songs" [routerLink]="['/song-details', item?.id]">
+      <!-- Display the album or playlist cover image -->
+      <ion-avatar slot="start">
+        <img [src]="item?.image" alt="Album Cover" />
+      </ion-avatar>
+      <!-- Display the title of the album or playlist -->
+      <ion-label>
+        <h2>{{ item?.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Display a message if no results are found -->
+  <p *ngIf="songs.length === 0 && searchTerm">No results found.</p>
+</ion-content>

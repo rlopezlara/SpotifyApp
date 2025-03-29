@@ -1,0 +1,41 @@
+<!-- Header section with translucency enabled -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- Page Title -->
+    <ion-title>Details</ion-title>
+
+    <!-- Back button to navigate back to the songs search page -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/songs"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Main content section with full-screen mode and padding -->
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Display album details only if 'album' data exists -->
+  <ion-card *ngIf="album">
+    <!-- Album Cover Image -->
+    <img [src]="album?.image" alt="Cover" />
+
+    <!-- Album Header: Title and Release Date -->
+    <ion-card-header>
+      <ion-card-title>{{ album?.title }}</ion-card-title>
+      <ion-card-subtitle *ngIf="album?.release_date">
+        Released: {{ album?.release_date }}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <!-- Album Content: Description and Spotify Link -->
+    <ion-card-content>
+      
+      <!-- Display album description if available -->
+      <p *ngIf="album?.description">{{ album?.description }}</p>
+      <p *ngIf="album?.owner">Created by: {{ album?.owner }}</p> 
+      <!-- Button to open the album on Spotify -->
+      <ion-button expand="full" color="success" (click)="openSpotify()">
+        Listen on Spotify
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
